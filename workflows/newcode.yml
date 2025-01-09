@@ -1,0 +1,37 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-run:
+    name: Build and Run Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Docker environment
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      # Step 3: Build the Docker image
+      - name: Build Docker Image
+        run: |
+          docker build -t valentineproject:latest .
+
+      # Step 4: Run the Docker container
+      - name: Run Docker Container
+        run: |
+          docker run -d -p 8080:80 --name valentineproject valentineproject:latest
+
+      # Step 5: Verify the container is running
+      - name: Verify Docker Container
+        run: |
+          docker ps -a
+
+
