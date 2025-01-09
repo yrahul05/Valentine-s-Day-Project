@@ -22,16 +22,16 @@ jobs:
       # Step 3: Build the Docker image
       - name: Build Docker Image
         run: |
-          docker build -t valentineproject:latest .
+         sudo docker build -t valentineproject:latest .
 
       # Step 4: Run the Docker container
       - name: Run Docker Container
         run: |
-          docker run -d -p 8080:80 --name valentineproject valentineproject:latest
+          sudo docker run -d -p 8080:80 --name valentineproject valentineproject:latest
 
       # Step 5: Verify the container is running
       - name: Verify Docker Container
         run: |
-          docker ps -a
+          sudo docker ps -a
 
 
